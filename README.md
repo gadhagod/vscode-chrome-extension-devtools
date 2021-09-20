@@ -1,5 +1,6 @@
 # VSCode Chrome Extension Developer Tools
-VSCode support for Chrome extension development
+VSCode support for Chrome extension development. 
+[View on Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=aaravb.chrome-extension-developer-tools).
 
 ## Features
 * Initialize chrome extensions in VSCode.
