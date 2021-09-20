@@ -1,0 +1,64 @@
+{
+  "name": "chrome-extension-developer-tools",
+  "displayName": "Chrome Extension Developer Tools",
+  "description": "VSCode support for Chrome extension development",
+  "icon": "assets/chrome.png",
+  "publisher": "aaravb",
+  "repository": {
+    "url": "https://github.com/gadhagod/vscode-chrome-extension-devtools"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.59.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "chrome"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/manifest.json",
+    "onCommand:chrome-extension-developer-tools.create",
+    "onCommand:chrome-extension-developer-tools.watch",
+    "onCommand:chrome-extension-developer-tools.build"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "chrome-extension-developer-tools.create",
+        "title": "Chrome Extension: Create New"
+      },
+      {
+        "command": "chrome-extension-developer-tools.watch",
+        "title": "Chrome Extension: Watch Files"
+      },
+      {
+        "command": "chrome-extension-developer-tools.build",
+        "title": "Chrome Extension: Build Files"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.59.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "eslint": "^7.27.0",
+    "glob": "^7.1.7",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "chrome-extension-cli-client": "github:gadhagod/chrome-extension-cli-client"
+  }
+}
