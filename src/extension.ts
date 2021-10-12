@@ -1,13 +1,10 @@
 import * as vscode from "vscode";
-import { registerCommands, registerHovers } from "./utils";
+import { registerCommands } from "./utils";
 
 // import commands
 import createCommand from "./commands/create";
 import watchCommand from "./commands/watch";
 import buildCommand from "./commands/build";
-
-// import hovers
-import manifestHover from "./hovers/manifest"
 
 // called when extension is activated
 export function activate(context: vscode.ExtensionContext) {
@@ -19,7 +16,6 @@ export function activate(context: vscode.ExtensionContext) {
         ],
         context
     );
-    registerHovers([manifestHover]);
 }
 
 // Called when extension is deactivated
