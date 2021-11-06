@@ -17,7 +17,7 @@ export default (context: vscode.ExtensionContext) => {
         }
     );
 
-    initializationScreen.webview.html = readFileSync(vscode.Uri.file(join(context.extensionPath, "src", "webviews", "initializationScreen.html")).fsPath, "utf-8");
+    initializationScreen.webview.html = readFileSync(vscode.Uri.file(join(context.extensionPath, "webviews", "initializationScreen.html")).fsPath, "utf-8");
 
     initializationScreen.webview.onDidReceiveMessage(
         (res: {
