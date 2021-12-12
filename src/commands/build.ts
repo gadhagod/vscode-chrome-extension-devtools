@@ -14,5 +14,5 @@ export default (context: vscode.ExtensionContext) => {
     }
     let terminal = vscode.window.createTerminal({ name: "build", iconPath: vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png")) });
     terminal.show();
-    terminal.sendText("webpack --mode=production --config config/webpack.config.js");
+    terminal.sendText("node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js");
 }
