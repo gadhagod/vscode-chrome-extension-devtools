@@ -17,10 +17,3 @@ export function registerCommands(
         }));
     });
 }
-/**
- * Returns if webpack is installed globally
- * @returns {boolean}
- */
-export function isWebpackInstalled(): boolean {
-    return !(spawnSync("webpack", ["--help"]).error);
-}
