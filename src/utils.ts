@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as types from "./types";
-import { spawnSync } from "child_process";
 
 /**
  * Registers a list of vscode commands
