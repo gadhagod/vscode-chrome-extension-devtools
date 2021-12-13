@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import * as types from "./types";
-import { spawnSync } from "child_process";
 
 /**
  * Registers a list of vscode commands
@@ -16,11 +15,4 @@ export function registerCommands(
             command.func(context); 
         }));
     });
-}
-/**
- * Returns if webpack is installed globally
- * @returns {boolean}
- */
-export function isWebpackInstalled(): boolean {
-    return !(spawnSync("webpack", ["--help"]).error);
 }
