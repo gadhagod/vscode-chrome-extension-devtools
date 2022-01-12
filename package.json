@@ -59,6 +59,6 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "chrome-extension-cli-client": "github:gadhagod/chrome-extension-cli-client"
+    "chrome-extension-cli-client": "github:gadhagod/chrome-extension-cli-client#aaravb_1.1.0"
   }
 }
