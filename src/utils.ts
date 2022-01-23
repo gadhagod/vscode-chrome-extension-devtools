@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import * as vscode from "vscode";
 import * as types from "./types";
 
@@ -15,4 +16,18 @@ export function registerCommands(
             command.func(context); 
         }));
     });
+}
+
+/**
+ * Builds a webview's HTML by rendering a template
+ * @param {string} template HTML template file of webview
+ * @param {object} data Data to be passed into template
+ */
+export function renderWebview(template: string, data: object) {
+    let html = readFileSync(vscode.Uri.file(template).fsPath, "utf-8");
+    let variables = Object.keys(data);
+    for(let i = 0; i < variables.length; i++) {
+        html = html.replace(`{{${variables[i]}}}`, (data as any)[variables[i]]);
+    }
+    return html;
 }

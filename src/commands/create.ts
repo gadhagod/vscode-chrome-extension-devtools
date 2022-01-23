@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { readFileSync } from "fs";
+import { renderWebview } from "../utils";
 import { join } from "path";
 const createExtension = require("chrome-extension-cli-client").createExtension;
 
@@ -17,7 +17,18 @@ export default (context: vscode.ExtensionContext) => {
         }
     );
 
-    initializationScreen.webview.html = readFileSync(vscode.Uri.file(join(context.extensionPath, "webviews", "initializationScreen.html")).fsPath, "utf-8");
+    let stylesSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "styles.css"))).toString();
+    let scriptSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "index.js"))).toString();
+    let chromeImgSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png"))).toString();
+
+    initializationScreen.webview.html = renderWebview(
+        join(context.extensionPath, "webviews", "initialization_screen", "index.html"), 
+        {
+            "index.js": scriptSrc, 
+            "styles.css": stylesSrc, 
+            "/assets/chrome.png": chromeImgSrc
+        }
+    );
 
     initializationScreen.webview.onDidReceiveMessage(
         (res: {
@@ -43,7 +54,7 @@ export default (context: vscode.ExtensionContext) => {
                         status: "GIVE",
                         message: { path: (locations as vscode.Uri[])[0].fsPath }
                     });
-                })
+                });
                 return;
             }
 
@@ -63,18 +74,18 @@ export default (context: vscode.ExtensionContext) => {
 
                 vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(join(config.chosenPath, config.projectName)), {
                     forceNewWindow: true
-                })
+                });
             } catch (e) {
-                console.log(e);
+                console.error(e);
                 let err = e as { message: string };
                 vscode.window.showErrorMessage("ERROR: " + (err).message);
                 initializationScreen.webview.postMessage({
                     status: "ERR",
                     message: err.message
-                })
+                });
             }
         },
         undefined,
         context.subscriptions
-    )
-}
+    );
+};
