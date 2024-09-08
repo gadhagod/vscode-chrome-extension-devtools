@@ -1,41 +1,47 @@
-<link rel="stylesheet" href="{{styles.css}}">
-
-<center>
-    <img src="{{/assets/chrome.png}}" height="5%" width="5%">
-    <h1 align>New Chrome Extension</h1>
-</center>
-<hr>
+<link rel="stylesheet" href="{{styles.css}}" />
 <body>
-    <label for="project_name">Project Name:</label>
-    <input type="text" id="project_name" required>
-
-    <br><br>
-
-    <label for="extension_type">Extension Type <small>[<a href="https://github.com/gadhagod/chrome-extension-cli-client/blob/master/templates/README.md#templates">?</a>]</small>:</label>
-
-    <select id="extension_type">
-        <option value="popup">Popup</option>
-        <option value="override_page">Override page</option>
-        <option value="devtools">Dev tools</option>
-    </select>
-
-    <br><br>
-
-    <label id="location_label" for="choose_location">Location: </label>
-    <button id="choose_location" onclick="getLocation()">Choose</button>
-
-    <br><br>
-
-    <button id="submit" onclick="submit()">Create</button>
-
-    <div id="loading" style="display: none">
-        <hr>
-        <center>
-            <p id="loading_text">Creating extension and installing dependencies.</p>
-            <div id="loader"></div>
-        </center>
+  <div class="container">
+    <div class="header">
+      <div class="icon">
+        <img src="{{/assets/chrome.png}}" alt="icon" />
+      </div>
+      <p class="title">Create New Chrome Extension</p>
     </div>
+    <div class="project-form">
+      <div class="inputs">
+        <input type="text" id="project_name" placeholder="Project Name" />
+        <div class="extension_type_container">
+          <label for="extension_type">
+            Extension Type:
+            <a
+              id="extension_type_info"
+              href="https://github.com/gadhagod/chrome-extension-cli-client/blob/master/templates/README.md#templates"
+            >
+              (?)
+            </a>
+          </label>
+          <select name="Extension Type" id="extension_type">
+            <option value="popup">Popup</option>
+            <option value="override_page">Override page</option>
+            <option value="devtools">Dev tools</option>
+          </select>
+        </div>
+        <div class="location_container">
+          <label for="choose_location">
+            Choose Location:
+            <button id="choose_location" onclick="getLocation()">Choose</button>
+          </label>
+          <span id="location_label">(no location selected)</span>
+        </div>
+      </div>
+    </div>
+    <button id="submit" onclick="submit()">Create</button>
+  </div>
+
+  <div class="loading" style="visibility: hidden">
+    <p class="loading_text">Setting up project.</p>
+    <div class="loader"></div>
+  </div>
 </body>
 
-<script src="{{index.js}}">
-</script>
+<script src="{{index.js}}"></script>
