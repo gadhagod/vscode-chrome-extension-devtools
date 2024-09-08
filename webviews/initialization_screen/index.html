@@ -5,12 +5,12 @@
       <div class="icon">
         <img src="{{/assets/chrome.png}}" alt="icon" />
       </div>
-      <div class="title">Create New Chrome Extension</div>
+      <p class="title">Create New Chrome Extension</p>
     </div>
     <div class="project-form">
       <div class="inputs">
         <input type="text" id="project_name" placeholder="Project Name" />
-        <div>
+        <div class="extension_type_container">
           <label for="extension_type">
             Extension Type:
             <a
@@ -38,7 +38,7 @@
     <button id="submit" onclick="submit()">Create</button>
   </div>
 
-  <div class="loading" style="display: none">
+  <div class="loading" style="visibility: hidden">
     <p class="loading_text">Setting up project.</p>
     <div class="loader"></div>
   </div>

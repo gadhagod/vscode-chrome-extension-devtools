@@ -4,7 +4,7 @@ window.addEventListener("message", data => {
   var res = data.data;
 
   if (res.status === "GIVE") {
-    document.getElementById("location_label").innerHTML = "Location: " + res.message.path;
+    document.getElementById("location_label").innerHTML = res.message.path;
   } else if (res.status === "ERR") {
     document.querySelector(".loading").style.display = "none";
     document.getElementById("project_name").removeAttribute("disabled");
@@ -44,7 +44,7 @@ function submit() {
     return;
   }
 
-  document.querySelector(".loading").style.display = "flex";
+  document.querySelector(".loading").style.visibility = "visible";
 
   vscode.postMessage({
     status: "OK",
@@ -67,5 +67,5 @@ function submit() {
       loadingText.innerHTML += ".";
       ellipsisDotCount++;
     }
-  }, 1000);
+  }, 500);
 })();
