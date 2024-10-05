@@ -1,5 +1,5 @@
 # VSCode Chrome Extension Developer Tools
-
+<img src="image.jpg" alt="Alternate text" />
 ![](https://img.shields.io/visual-studio-marketplace/d/aaravb.chrome-extension-developer-tools) ![](https://img.shields.io/visual-studio-marketplace/i/aaravb.chrome-extension-developer-tools) \
 VSCode support for Chrome extension development.
 [View on Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=aaravb.chrome-extension-developer-tools).
