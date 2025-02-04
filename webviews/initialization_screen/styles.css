@@ -1,8 +1,26 @@
 img {
     margin-top: 1%;
 }
-body {
-    margin-left: 3%;
+.body {
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 auto;
+    height: min-content;
+    background-color: var(--vscode-editor-background);
+}
+
+* {
+    /* border: solid 1px red; */
+    box-sizing: border-box;
+}
+
+.body > div {
+    margin-bottom: 10px;
+    width: 100% !important;
+    /* overflow: hidden; */
+    position: relative;
 }
 #loader {
     /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader */
@@ -17,4 +35,80 @@ body {
     /* https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader */
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.form-container {
+    font-family: var(--vscode-font-family);
+    width: 100%;
+    height: 100svh;
+    display: grid;
+    /* height: 100svh; */
+    place-items: center;
+}
+.form-container > div{
+    width: 100%;
+    height: 100100%;
+    display: flex;
+    flex-direction: column;
+    /* height: 100svh; */
+    justify-content: center;
+    align-items:stretch;
+    gap: 4rem;
+}
+
+.form-container > div > div {
+    width: 100%;
+}
+
+.input {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    position: relative;
+    width: 100% !important;
+    border: 1px solid var(--vscode-tab-activeForeground);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    font-size: 1.1rem;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: block;
+    
+}
+
+.ext-location {
+    background-color:  var(--vscode-editor-background);
+    color: white;
+}
+.ext-type {
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-tab-activeForeground);
+}
+
+#submit {
+    padding: 0.7rem 3rem;
+    background-color: var(--vscode-tab-activeForeground);
+    border: solid 1px var(--vscode-button-background);
+    color: var(--vscode-button-background) !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    transition: 0.4s linear;
+}
+
+#submit:hover {
+    background-color: var(--vscode-button-hoverBackground);
+
+}
+
+.location-value {
+    font-weight: 300;
+    font-family: monospace;
 }
