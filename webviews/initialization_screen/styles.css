@@ -103,6 +103,11 @@ img {
     transition: 0.4s linear;
 }
 
+#submit-btn-container {
+    display: flex;
+    justify-content: center;
+}
+
 #submit:hover {
     background-color: var(--vscode-button-hoverBackground);
 
