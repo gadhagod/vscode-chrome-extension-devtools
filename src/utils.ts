@@ -7,14 +7,13 @@ import * as types from "./types";
  * @param {VscodeCommandMetadata[]} commands List of commands to be registered
  * @param {vscode.ExtensionContext} context Context of extension
  */
-export function registerCommands(
-    commands: types.VscodeCommandMetadata[], 
-    context: vscode.ExtensionContext
-) {
-    commands.forEach((command) => { 
-        context.subscriptions.push(vscode.commands.registerCommand(`chrome-extension-developer-tools.${command.name}`, () => { 
-            command.func(context); 
-        }));
+export function registerCommands(commands: types.VscodeCommandMetadata[], context: vscode.ExtensionContext) {
+    commands.forEach((command) => {
+        context.subscriptions.push(
+            vscode.commands.registerCommand(`chrome-extension-developer-tools.${command.name}`, () => {
+                command.func(context);
+            })
+        );
     });
 }
 
@@ -26,7 +25,7 @@ export function registerCommands(
 export function renderWebview(template: string, data: object) {
     let html = readFileSync(vscode.Uri.file(template).fsPath, "utf-8");
     let variables = Object.keys(data);
-    for(let i = 0; i < variables.length; i++) {
+    for (let i = 0; i < variables.length; i++) {
         html = html.replace(`{{${variables[i]}}}`, (data as any)[variables[i]]);
     }
     return html;

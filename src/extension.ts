@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
         [
             { name: "create", func: createCommand },
             { name: "watch", func: watchCommand },
-            { name: "build", func: buildCommand }
+            { name: "build", func: buildCommand },
         ],
         context
     );

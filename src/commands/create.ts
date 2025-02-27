@@ -13,28 +13,31 @@ export default (context: vscode.ExtensionContext) => {
         "New Chrome Extension",
         vscode.ViewColumn.One,
         {
-            enableScripts: true
+            enableScripts: true,
         }
     );
 
-    let stylesSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "styles.css"))).toString();
-    let scriptSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "index.js"))).toString();
-    let chromeImgSrc = initializationScreen.webview.asWebviewUri(vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png"))).toString();
+    let stylesSrc = initializationScreen.webview
+        .asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "styles.css")))
+        .toString();
+    let scriptSrc = initializationScreen.webview
+        .asWebviewUri(vscode.Uri.file(join(context.extensionPath, "webviews", "initialization_screen", "index.js")))
+        .toString();
+    let chromeImgSrc = initializationScreen.webview
+        .asWebviewUri(vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png")))
+        .toString();
 
     initializationScreen.webview.html = renderWebview(
-        join(context.extensionPath, "webviews", "initialization_screen", "index.html"), 
+        join(context.extensionPath, "webviews", "initialization_screen", "index.html"),
         {
-            "index.js": scriptSrc, 
-            "styles.css": stylesSrc, 
-            "/assets/chrome.png": chromeImgSrc
+            "index.js": scriptSrc,
+            "styles.css": stylesSrc,
+            "/assets/chrome.png": chromeImgSrc,
         }
     );
 
     initializationScreen.webview.onDidReceiveMessage(
-        (res: {
-            status: "OK" | "ERR" | "GET" | "GIVE",
-            message: any
-        }) => {
+        (res: { status: "OK" | "ERR" | "GET" | "GIVE"; message: any }) => {
             console.log(res);
 
             if (res.status === "ERR") {
@@ -43,45 +46,51 @@ export default (context: vscode.ExtensionContext) => {
             }
 
             if (res.status === "GET") {
-                vscode.window.showOpenDialog({
-                    title: "Choose a location",
-                    openLabel: "Select",
-                    canSelectFiles: false,
-                    canSelectFolders: true,
-                    canSelectMany: false
-                }).then((locations) => {
-                    initializationScreen.webview.postMessage({
-                        status: "GIVE",
-                        message: { path: (locations as vscode.Uri[])[0].fsPath }
+                vscode.window
+                    .showOpenDialog({
+                        title: "Choose a location",
+                        openLabel: "Select",
+                        canSelectFiles: false,
+                        canSelectFolders: true,
+                        canSelectMany: false,
+                    })
+                    .then((locations) => {
+                        initializationScreen.webview.postMessage({
+                            status: "GIVE",
+                            message: { path: (locations as vscode.Uri[])[0].fsPath },
+                        });
                     });
-                });
                 return;
             }
 
-            let config = res.message as { projectName: string, extensionType: string, chosenPath: string };
+            let config = res.message as { projectName: string; extensionType: string; chosenPath: string };
 
             try {
                 createExtension(
                     config.projectName,
                     {
                         overridePage: config.extensionType === "override_page",
-                        devtools: config.extensionType === "devtools"
+                        devtools: config.extensionType === "devtools",
                     },
                     join(config.chosenPath),
-                    (str: string) => { }
+                    (str: string) => {}
                 );
                 initializationScreen.dispose();
 
-                vscode.commands.executeCommand("vscode.openFolder", vscode.Uri.file(join(config.chosenPath, config.projectName)), {
-                    forceNewWindow: true
-                });
+                vscode.commands.executeCommand(
+                    "vscode.openFolder",
+                    vscode.Uri.file(join(config.chosenPath, config.projectName)),
+                    {
+                        forceNewWindow: true,
+                    }
+                );
             } catch (e) {
                 console.error(e);
                 let err = e as { message: string };
-                vscode.window.showErrorMessage("ERROR: " + (err).message);
+                vscode.window.showErrorMessage("ERROR: " + err.message);
                 initializationScreen.webview.postMessage({
                     status: "ERR",
-                    message: err.message
+                    message: err.message,
                 });
             }
         },
