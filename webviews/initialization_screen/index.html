@@ -32,7 +32,9 @@
             </div>
 
             <div>
-                <label class="label" id="location_label" for="choose_location">Location: </label>
+                <label class="label" id="location_label" for="choose_location">Location: 
+                    <span id="location_value" class="location-value"></span>
+                </label>
                 <button class="input ext-location" id="choose_location" onclick="getLocation()">Choose</button>
             </div>
 
@@ -43,7 +45,7 @@
             <div id="loading" style="display: none">
                 <hr />
                 <center>
-                    <p id="loading_text">Creating extension and installing dependencies.</p>
+                    <p id="loading_text" class="loading-text">Creating extension and installing dependencies.</p>
                     <div id="loader"></div>
                 </center>
             </div>

@@ -4,14 +4,14 @@ window.addEventListener("message", (data) => {
     var res = data.data;
 
     if (res.status === "GIVE") {
-        const newSpanEl = `<span class='location-value'>${res.message.path}</span>`;
-        document.getElementById("location_label").innerHTML = "Location: " + newSpanEl;
+        document.getElementById("location_value").innerText = res.message.path;
     } else if (res.status === "ERR") {
         document.getElementById("loading").style.display = "none";
         document.getElementById("project_name").removeAttribute("disabled");
         document.getElementById("extension_type").removeAttribute("disabled");
         document.getElementById("choose_location").removeAttribute("disabled");
         document.getElementById("submit").removeAttribute("disabled");
+        document.getElementById("submit-btn-container").style.display = "flex";
     } else if (res.status === "LOAD") {
         document.getElementById("loader").innerHTML += "\n" + res.message;
     }
@@ -27,7 +27,7 @@ function getLocation() {
 function submit() {
     let projectName = document.getElementById("project_name").value;
     let extensionType = document.getElementById("extension_type").value;
-    let chosenPath = document.getElementById("location_label").innerHTML.replace("Location: ", "");
+    let chosenPath = document.getElementById("location_value").innerText;
 
     document.getElementById("project_name").setAttribute("disabled", "");
     document.getElementById("extension_type").setAttribute("disabled", "");
@@ -45,6 +45,7 @@ function submit() {
         return;
     }
 
+    document.getElementById("submit-btn-container").style.display = "none";
     document.getElementById("loading").style.display = "block";
 
     vscode.postMessage({
