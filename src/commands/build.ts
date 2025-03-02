@@ -7,7 +7,10 @@ import { join } from "path";
  * @param {vscode.ExtensionContext} context
  */
 export default (context: vscode.ExtensionContext) => {
-    let terminal = vscode.window.createTerminal({ name: "build", iconPath: vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png")) });
+    let terminal = vscode.window.createTerminal({
+        name: "build",
+        iconPath: vscode.Uri.file(join(context.extensionPath, "assets", "chrome.png")),
+    });
     terminal.show();
     terminal.sendText("node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js");
-}
+};

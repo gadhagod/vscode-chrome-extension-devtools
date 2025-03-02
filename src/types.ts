@@ -7,7 +7,7 @@ export interface VscodeCommandFunc {
     /**
      * @param context Context of extension
      */
-    (context: vscode.ExtensionContext): void
+    (context: vscode.ExtensionContext): void;
 }
 /**
  * Metadata of a vscode command
@@ -15,8 +15,8 @@ export interface VscodeCommandFunc {
  * @property {VscodeCommandFunc} func Function to be executed with command
  */
 export interface VscodeCommandMetadata {
-    name: string,
-    func: VscodeCommandFunc
+    name: string;
+    func: VscodeCommandFunc;
 }
 /**
  * Function to be executed on a hover
@@ -27,5 +27,5 @@ export interface VscodeHoverFunc {
      * @param {vscode.Position} position Position of hovered word
      * @returns {vscode.Hover | undefined}
      */
-    (editor: vscode.TextDocument, position: vscode.Position): vscode.Hover | undefined
+    (editor: vscode.TextDocument, position: vscode.Position): vscode.Hover | undefined;
 }
